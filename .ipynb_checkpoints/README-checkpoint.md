@@ -37,7 +37,7 @@ Randomized controlled trials (RCTs) are the gold standard for clinical evidence,
 ```
 bme6938-project-3/
 ├── figures/           # generated plots and visualizations
-├── models/            # saved model checkpoints (not tracked by git)
+├── models/            # saved model checkpoints
 ├── eda.ipynb          # exploratory data analysis
 ├── train.ipynb        # LSTM + DistilBERT training pipeline
 ├── demo.ipynb         # load trained models, run inference, error analysis
