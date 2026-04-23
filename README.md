@@ -1,4 +1,4 @@
-# Clinical NLP — PubMed RCT Sentence Classification
+# Clinical NLP - PubMed RCT Sentence Classification
 
 > NLP pipeline for classifying clinical trial abstract sentences into rhetorical roles using a bidirectional LSTM baseline and fine-tuned DistilBERT. Built on the PubMed RCT 20k dataset.
 
