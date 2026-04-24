@@ -118,7 +118,7 @@ Full list of dependencies in `requirements.txt`.
 | Name | Role |
 |------|------|
 | Gael Garcia | Project lead, LSTM + DistilBERT training pipeline, model architecture, GitHub setup |
-| Jada | Data preprocessing, EDA notebook, class imbalance analysis, visualizations |
+| Jada Brown | Data preprocessing, EDA notebook, class imbalance analysis, visualizations |
 | Dylan | Literature review, evaluation metrics, error analysis, demo notebook |
 
 ---
