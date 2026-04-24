@@ -17,18 +17,18 @@ Randomized controlled trials (RCTs) are the gold standard for clinical evidence,
 
 | Model | Accuracy | Macro F1 | Weighted F1 | Params |
 |-------|:---:|:---:|:---:|:---:|
-| Bidirectional LSTM | 83% | 0.77 | 0.83 | 6.2M |
-| DistilBERT | 85% | 0.79 | 0.85 | 67M |
+| Bidirectional LSTM | 84% | 0.78 | 0.84 | 6.2M |
+| DistilBERT | 86% | 0.80 | 0.86 | 67M |
 
 ### Per-Class F1
 
 | Class | LSTM | DistilBERT |
 |-------|:---:|:---:|
-| background | 0.63 | 0.69 |
-| objective | 0.64 | 0.63 |
-| methods | 0.91 | 0.93 |
-| results | 0.89 | 0.90 |
-| conclusions | 0.78 | 0.81 |
+| background | 0.65 | 0.69 |
+| objective | 0.64 | 0.66 |
+| methods | 0.92 | 0.93 |
+| results | 0.90 | 0.91 |
+| conclusions | 0.79 | 0.82 |
 
 ---
 
@@ -94,7 +94,7 @@ ds = load_dataset('armanc/pubmed-rct20k')
 - **Preprocessing:** Lowercased text, `@` tokens retained (anonymized numbers), class weights computed to handle imbalance
 - **LSTM Baseline:** Custom vocabulary (30k tokens), bidirectional LSTM (2 layers, hidden dim 256), embedding dim 128, dropout 0.3
 - **DistilBERT:** `distilbert-base-uncased` fine-tuned for sequence classification, max length 128, lr 2e-5
-- **Training:** Adam optimizer, ReduceLROnPlateau scheduler, gradient clipping, best checkpoint saved by val loss
+- **Training:** Adam optimizer, ReduceLROnPlateau scheduler, gradient clipping, early stopping, best checkpoint saved by val loss
 - **Evaluation:** Accuracy, per-class Precision/Recall/F1, Macro F1, Weighted F1, Confusion Matrix
 
 ---
