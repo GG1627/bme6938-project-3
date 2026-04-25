@@ -73,8 +73,6 @@ Then run the notebooks in order:
 
 ## Usage Guide
 
-This section provides a reproducible run order with expected outputs at each stage.
-
 ### Step 1 - Run EDA notebook
 
 Open and run all cells in `eda.ipynb`.
