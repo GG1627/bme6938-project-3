@@ -71,6 +71,45 @@ Then run the notebooks in order:
 
 ---
 
+## Usage Guide
+
+This section provides a reproducible run order with expected outputs at each stage.
+
+### Step 1 - Run EDA notebook
+
+Open and run all cells in `eda.ipynb`.
+
+Expected outputs:
+- Dataset loads successfully from Hugging Face (`armanc/pubmed-rct20k`).
+- Printed split sizes are close to 176k train / 29k validation / 29k test.
+- Class distribution and sentence-length analysis plots are generated.
+- EDA figures are saved (or displayed) for later reporting.
+
+### Step 2 - Train models
+
+Open and run all cells in `train.ipynb`.
+
+Expected outputs:
+- Preprocessing and tokenization complete without errors.
+- Training and validation logs are shown per epoch for the BiLSTM and DistilBERT runs.
+- Best checkpoints are saved in `models/`:
+	- `models/lstm_best.pt`
+	- `models/bert_best.pt`
+- Evaluation metrics are printed (accuracy, macro F1, weighted F1, per-class scores).
+- Confusion matrix and/or training curves are displayed or saved.
+
+### Step 3 - Run inference and error analysis
+
+Open and run all cells in `demo.ipynb`.
+
+Expected outputs:
+- Saved checkpoints load successfully from `models/`.
+- Sample sentence predictions are produced for both models.
+- Misclassification examples and class-level error patterns are shown.
+- Final comparison aligns with the reported summary (DistilBERT slightly higher overall performance).
+
+---
+
 ## Data
 
 - **Source:** [PubMed RCT 20k](https://huggingface.co/datasets/armanc/pubmed-rct20k) via Hugging Face
