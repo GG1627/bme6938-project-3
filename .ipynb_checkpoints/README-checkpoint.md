@@ -17,18 +17,18 @@ Randomized controlled trials (RCTs) are the gold standard for clinical evidence,
 
 | Model | Accuracy | Macro F1 | Weighted F1 | Params |
 |-------|:---:|:---:|:---:|:---:|
-| Bidirectional LSTM | 83% | 0.77 | 0.83 | 6.2M |
-| DistilBERT | 85% | 0.79 | 0.85 | 67M |
+| Bidirectional LSTM | 84% | 0.78 | 0.84 | 6.2M |
+| DistilBERT | 86% | 0.80 | 0.86 | 67M |
 
 ### Per-Class F1
 
 | Class | LSTM | DistilBERT |
 |-------|:---:|:---:|
-| background | 0.63 | 0.69 |
-| objective | 0.64 | 0.63 |
-| methods | 0.91 | 0.93 |
-| results | 0.89 | 0.90 |
-| conclusions | 0.78 | 0.81 |
+| background | 0.65 | 0.69 |
+| objective | 0.64 | 0.66 |
+| methods | 0.92 | 0.93 |
+| results | 0.90 | 0.91 |
+| conclusions | 0.79 | 0.82 |
 
 ---
 
@@ -71,6 +71,43 @@ Then run the notebooks in order:
 
 ---
 
+## Usage Guide
+
+### Step 1 - Run EDA notebook
+
+Open and run all cells in `eda.ipynb`.
+
+Expected outputs:
+- Dataset loads successfully from Hugging Face (`armanc/pubmed-rct20k`).
+- Printed split sizes are close to 176k train / 29k validation / 29k test.
+- Class distribution and sentence-length analysis plots are generated.
+- EDA figures are saved (or displayed) for later reporting.
+
+### Step 2 - Train models
+
+Open and run all cells in `train.ipynb`.
+
+Expected outputs:
+- Preprocessing and tokenization complete without errors.
+- Training and validation logs are shown per epoch for the BiLSTM and DistilBERT runs.
+- Best checkpoints are saved in `models/`:
+	- `models/lstm_best.pt`
+	- `models/bert_best.pt`
+- Evaluation metrics are printed (accuracy, macro F1, weighted F1, per-class scores).
+- Confusion matrix and/or training curves are displayed or saved.
+
+### Step 3 - Run inference and error analysis
+
+Open and run all cells in `demo.ipynb`.
+
+Expected outputs:
+- Saved checkpoints load successfully from `models/`.
+- Sample sentence predictions are produced for both models.
+- Misclassification examples and class-level error patterns are shown.
+- Final comparison aligns with the reported summary (DistilBERT slightly higher overall performance).
+
+---
+
 ## Data
 
 - **Source:** [PubMed RCT 20k](https://huggingface.co/datasets/armanc/pubmed-rct20k) via Hugging Face
@@ -94,7 +131,7 @@ ds = load_dataset('armanc/pubmed-rct20k')
 - **Preprocessing:** Lowercased text, `@` tokens retained (anonymized numbers), class weights computed to handle imbalance
 - **LSTM Baseline:** Custom vocabulary (30k tokens), bidirectional LSTM (2 layers, hidden dim 256), embedding dim 128, dropout 0.3
 - **DistilBERT:** `distilbert-base-uncased` fine-tuned for sequence classification, max length 128, lr 2e-5
-- **Training:** Adam optimizer, ReduceLROnPlateau scheduler, gradient clipping, best checkpoint saved by val loss
+- **Training:** Adam optimizer, ReduceLROnPlateau scheduler, gradient clipping, early stopping, best checkpoint saved by val loss
 - **Evaluation:** Accuracy, per-class Precision/Recall/F1, Macro F1, Weighted F1, Confusion Matrix
 
 ---
@@ -118,8 +155,8 @@ Full list of dependencies in `requirements.txt`.
 | Name | Role |
 |------|------|
 | Gael Garcia | Project lead, LSTM + DistilBERT training pipeline, model architecture, GitHub setup |
-| Jada | Data preprocessing, EDA notebook, class imbalance analysis, visualizations |
-| Dylan | Literature review, evaluation metrics, error analysis, demo notebook |
+| Jada Brown | Data preprocessing, EDA notebook, class imbalance analysis, visualizations |
+| Dylan Tan | Literature review, Evaluation metrics, Error analysis, Demo notebook, code review |
 
 ---
 
